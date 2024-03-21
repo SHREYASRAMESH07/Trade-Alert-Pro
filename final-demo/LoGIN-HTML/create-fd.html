@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="../styles/create-accn.css">
+    <style>
+       
+
+        main {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+ 
+
+        h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        .login-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #userInfo {
+            background-color: #20c917;
+            box-shadow: 0 0 10px rgba(21, 176, 40, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="../Data/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Create Your Account</h2>
+        </section>
+
+        <form id="createAccountForm">
+            <!-- First Name -->
+            <div class="input-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <!-- Last Name -->
+            <div class="input-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <!-- Email -->
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+                <div id="emailAvailability" class="availability-status"></div>
+            </div>
+            <!-- Password -->
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="password" required>
+                    <label for="showPassword" class="show-password-label">
+                        <input type="checkbox" id="showPassword"> Show Password
+                    </label>
+                </div>
+            </div>
+            <!-- Confirm Password -->
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="confirmPassword" required>
+                    <label for="showConfirmPassword" class="show-password-label">
+                        <input type="checkbox" id="showConfirmPassword"> Show Password
+                    </label>
+                </div>
+            </div>
+
+            <!-- Password strength indicator -->
+            <div id="passwordStrength" class="password-strength"></div>
+            <!-- Password policy information -->
+            <div class="password-strength">
+                Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a digit,
+                and a special character.
+            </div>
+            <!-- Terms of Service and Privacy Policy links -->
+            <div class="terms-links">
+                <p>By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </div>
+            <!-- Button to submit the form -->
+            <button type="submit">Get Started</button>
+            <!-- Login link for existing members -->
+           <!-- Login link for existing members -->
+
+
+            <!-- Display error messages -->
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+
+        <div id="userInfo" style="display: none;">
+            <h3>User Information</h3>
+            <p id="displayFirstName"></p>
+            <p id="displayLastName"></p>
+            <p id="displayEmail"></p>
+        </div>
+
+        <!-- Login link for existing members -->
+        <p id="loginLink" class="login-link">
+            Already a member? <a href="./login-fd.html">Login here</a>
+        </p>
+
+
+        <!-- Import Firebase SDK -->
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+            import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+            import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js';
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+            };
+
+            const firebaseApp = initializeApp(firebaseConfig);
+            const auth = getAuth(firebaseApp);
+            const database = getDatabase(firebaseApp);
+
+            const createAccountForm = document.getElementById("createAccountForm");
+            const userInfoDiv = document.getElementById("userInfo");
+            const displayFirstName = document.getElementById("displayFirstName");
+            const displayLastName = document.getElementById("displayLastName");
+            const displayEmail = document.getElementById("displayEmail");
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+            const passwordInput = document.getElementById("password");
+            const passwordStrengthIndicator = document.getElementById("passwordStrength");
+            const errorMessageDiv = document.getElementById("errorMessage");
+            const loginLink = document.getElementById("loginLink");
+
+            passwordInput.addEventListener("input", function () {
+                const strength = calculatePasswordStrength(passwordInput.value);
+                passwordStrengthIndicator.textContent = `Password Strength: ${strength}`;
+            });
+
+            createAccountForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                // Reset error messages and styles
+                errorMessageDiv.textContent = "";
+                const inputGroups = createAccountForm.querySelectorAll(".input-group");
+                inputGroups.forEach(group => group.classList.remove("error"));
+
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    displayError("Passwords do not match. Please enter matching passwords.");
+                    return;
+                }
+
+                const firstName = document.getElementById("firstName").value;
+                const lastName = document.getElementById("lastName").value;
+                const email = document.getElementById("email").value;
+                const password = passwordInput.value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+
+                        const userData = {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        };
+
+                        set(ref(database, 'users/' + user.uid), userData);
+
+                        displayFirstName.textContent = "First Name: " + userData.firstName;
+                        displayLastName.textContent = "Last Name: " + userData.lastName;
+                        displayEmail.textContent = "Email: " + userData.email;
+
+                        userInfoDiv.style.display = "block";
+                        createAccountForm.style.display = "none";
+                        errorMessageDiv.style.display = "none";
+                        loginLink.style.display = "block";
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        displayError(`Account creation failed: ${errorCode} - ${errorMessage}`);
+                    });
+            });
+
+            // Show Password functionality
+            const showPasswordCheckbox = document.getElementById("showPassword");
+            const showConfirmPasswordCheckbox = document.getElementById("showConfirmPassword");
+
+            showPasswordCheckbox.addEventListener("change", function () {
+                passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+            });
+
+            showConfirmPasswordCheckbox.addEventListener("change", function () {
+                confirmPasswordInput.type = showConfirmPasswordCheckbox.checked ? "text" : "password";
+            });
+
+ // Email Availability Check
+const emailInput = document.getElementById("email");
+const emailAvailabilityDiv = document.getElementById("emailAvailability");
+
+emailInput.addEventListener("input", function () {
+    const email = emailInput.value;
+    // Simulate email availability check (replace with server-side logic)
+    setTimeout(() => {
+        const isEmailAvailable = Math.random() < 0.8; // Simulate 80% availability
+
+        // Update the availability message
+        const availabilityMessage = isEmailAvailable ? "Email is available!" : "Email already exists. Please choose a different email.";
+        emailAvailabilityDiv.textContent = availabilityMessage;
+
+        // Make the error message visible and set the color to red
+        emailAvailabilityDiv.style.color = isEmailAvailable ? "green" : "red";
+        emailAvailabilityDiv.style.display = "block";
+    }, 500); // Simulate a 500ms delay
+});
+
+
+
+            // Function to display error messages
+            function displayError(message) {
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.style.display = "block";
+            }
+
+            // Function to calculate password strength
+            function calculatePasswordStrength(password) {
+                const minLength = 8;
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasLowercase = /[a-z]/.test(password);
+                const hasDigit = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                let score = 0;
+                if (password.length >= minLength) {
+                    score += 1;
+                }
+                if (hasUppercase) {
+                    score += 1;
+                }
+                if (hasLowercase) {
+                    score += 1;
+                }
+                if (hasDigit) {
+                    score += 1;
+                }
+                if (hasSpecialChar) {
+                    score += 1;
+                }
+
+                if (score === 5) {
+                    return "Strong";
+                } else if (score >= 3) {
+                    return "Medium";
+                } else {
+                    return "Weak";
+                }
+            }
+            
+        </script>
+    </main>
+</body>
+
+</html>

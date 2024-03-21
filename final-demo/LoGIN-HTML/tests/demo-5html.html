@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #3498db;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto; /* Center the logo */
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section h2 {
+            text-align: center;
+            padding: 20px 0;
+            color: #3498db;
+        }
+
+        .testimonial {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .demo-video {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .partnerships-section {
+            color: #fff;
+            background-color: #3498db;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .partnerships-section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .partnerships {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .partnership {
+            flex: 0 1 30%;
+            margin: 10px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #4CAF50, #007BFF);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            max-width: 120px;
+            margin-right: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.1); /* Transparent background */
+            padding: 15px 0;
+            border-bottom: 2px solid #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        .services-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+
+        .feature {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Adjusted colors for better visibility */
+        h2,
+        h3 {
+            color: #007BFF;
+        }
+
+        p {
+            color: #333;
+        }
+
+        .partnership:hover {
+            transform: scale(1.05);
+        }
+
+        .partnership img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .partnership:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="../../Data/TAP.png" alt="TradeAlertPro Logo">
+
+        <nav>
+            <ul>
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./intro/desk-f.html">Services</a></li>
+                <li><a href="./contact-f.html">Learn</a></li>
+                <li><a href="./about-f.html">About</a></li>
+                <li><a href="./contact-f.html">Contact</a></li>
+                <li><a href="../final-demo/LoGIN-HTML/profile-trail-9.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="section">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial">
+                <p>"Trade Alert Pro has revolutionized the way I approach trading. The real-time alerts are incredibly accurate."</p>
+                <p>"The advanced analytics tools provided me with deep insights into market trends. Highly recommended!"</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>See Trade Alert Pro in Action</h2>
+            <div class="demo-video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/p7HKvqRI_Bo?si=RlnQ7B9W7nmx7jFz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="demo-video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/-IW8ZzY3xt8?si=Fjgu6rXRLAPLvld6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            
+        </div>
+
+        <div class="partnerships-section">
+            <h2>Our Partnerships</h2>
+            <div class="partnerships">
+                <div class="partnership">
+                    <img src="partner1.jpg" alt="Partner 1">
+                </div>
+                <div class="partnership">
+                    <img src="partner2.jpg" alt="Partner 2">
+                </div>
+                <div class="partnership">
+                    <img src="partner3.jpg" alt="Partner 3">
+                </div>
+                <div class="partnership">
+                    <img src="https://i.ibb.co/Sc8T3K4/partner4.jpg" alt="Partner 4">
+                </div>
+                <!-- Add more partnerships as needed -->
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

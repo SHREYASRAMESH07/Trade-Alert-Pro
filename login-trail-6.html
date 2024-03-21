@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="./cssstyle.css">
+   <style>
+       
+        .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .checkbox-container label {
+            font-size: 14px;
+            color: #333;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="./TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Login to Your Account</h2>
+            <div id="welcomeMsg" style="display: none;">Welcome, <span id="userName"></span>!</div>
+        </section>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="checkbox-container">
+                <div class="show-password-container">
+                    <input type="checkbox" id="showPassword">
+                    <label for="showPassword">Show Password</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+                </div>
+            </div>
+            <button type="submit">Login</button>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <div id="errorMessage"></div>
+            <p class="forgot-password"><a href="./forget-f.html">Forgot your password?</a></p>
+            <div class="signup-link">Don't have an account? <a href="./contact-trail.html">Sign up here</a></div>
+        </form>
+
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+            import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+            import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js';
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+            };
+
+            const firebaseApp = initializeApp(firebaseConfig);
+            const auth = getAuth(firebaseApp);
+            const database = getDatabase(firebaseApp);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const loginForm = document.getElementById("loginForm");
+                const welcomeMsg = document.getElementById("welcomeMsg");
+                const userNameSpan = document.getElementById("userName");
+                const errorMessageDiv = document.getElementById("errorMessage");
+                const loadingSpinner = document.getElementById("loadingSpinner");
+                const showPasswordCheckbox = document.getElementById("showPassword");
+                const passwordInput = document.getElementById("password");
+
+                if (loginForm) {
+                    loginForm.addEventListener("submit", async function (e) {
+                        e.preventDefault();
+
+                        const emailElement = document.getElementById("email");
+
+                        if (emailElement) {
+                            const emailOrMobile = emailElement.value;
+
+                            try {
+                                loadingSpinner.style.display = "block"; // Show loading spinner
+
+                                let password = passwordInput.value;
+
+                                // If "Show Password" is checked, display the actual password
+                                if (showPasswordCheckbox.checked) {
+                                    password = passwordInput.value;
+                                }
+
+                                const userCredential = await signInWithEmailAndPassword(auth, emailOrMobile, password);
+                                const user = userCredential.user;
+
+                                const userRef = ref(database, 'users/' + user.uid);
+                                const snapshot = await get(userRef);
+
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    welcomeMsg.style.display = "block";
+                                    userNameSpan.textContent = userData.firstName;
+                                    errorMessageDiv.style.display = "none";
+
+                                    // Redirect to the home page
+                                    window.location.href = "./intro/home-f.html";
+                                } else {
+                                    errorMessageDiv.textContent = "User not found in the database";
+                                    errorMessageDiv.style.display = "block";
+                                }
+                            } catch (error) {
+                                // Handle different types of errors
+                                errorMessageDiv.style.color = "#ff0000"; // Set error message color to red
+                                if (error.code === "auth/user-not-found") {
+                                    errorMessageDiv.textContent = "User not found. Please check your credentials.";
+                                } else if (error.code === "auth/wrong-password") {
+                                    errorMessageDiv.textContent = "Incorrect password. Please try again.";
+                                } else if (error.code === "auth/invalid-email") {
+                                    errorMessageDiv.textContent = "Invalid email format. Please provide a valid email address.";
+                                } else if (error.code === "auth/too-many-requests") {
+                                    errorMessageDiv.textContent = "Too many login attempts. Please try again later.";
+                                } else {
+                                    errorMessageDiv.textContent = `Login failed: ${error.message}`;
+                                }
+                                errorMessageDiv.style.display = "block";
+                            } finally {
+                                loadingSpinner.style.display = "none"; // Hide loading spinner
+                            }
+                        } else {
+                            console.error("Email element not found");
+                        }
+                    });
+                } else {
+                    console.error("Element with id 'loginForm' not found");
+                }
+
+                // Toggle password visibility
+                showPasswordCheckbox.addEventListener("change", function () {
+                    passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+                });
+            });
+        </script>
+    </main>
+</body>
+
+</html>

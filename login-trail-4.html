@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .forgot-password,
+        .signup-link {
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        .forgot-password a,
+        .signup-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover,
+        .signup-link a:hover {
+            color: #2980b9;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        form,
+        .logo {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="./TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Login to Your Account</h2>
+            <div id="welcomeMsg" style="display: none;">Welcome, <span id="userName"></span>!</div>
+        </section>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="input-group">
+                <label for="rememberMe">Remember Me</label>
+                <input type="checkbox" id="rememberMe">
+            </div>
+            <button type="submit">Login</button>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <div id="errorMessage"></div>
+            <p class="forgot-password"><a href="./forget-f.html">Forgot your password?</a></p>
+            <div class="signup-link">Don't have an account? <a href="./contact-trail.html">Sign up here</a></div>
+        </form>
+
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+            import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+            import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js';
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+            };
+
+            const firebaseApp = initializeApp(firebaseConfig);
+            const auth = getAuth(firebaseApp);
+            const database = getDatabase(firebaseApp);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const loginForm = document.getElementById("loginForm");
+                const welcomeMsg = document.getElementById("welcomeMsg");
+                const userNameSpan = document.getElementById("userName");
+                const errorMessageDiv = document.getElementById("errorMessage");
+                const loadingSpinner = document.getElementById("loadingSpinner");
+
+                if (loginForm) {
+                    loginForm.addEventListener("submit", async function (e) {
+                        e.preventDefault();
+
+                        const emailElement = document.getElementById("email");
+                        const passwordElement = document.getElementById("password");
+
+                        if (emailElement && passwordElement) {
+                            const emailOrMobile = emailElement.value;
+                            const password = passwordElement.value;
+
+                            try {
+                                loadingSpinner.style.display = "block"; // Show loading spinner
+
+                                const userCredential = await signInWithEmailAndPassword(auth, emailOrMobile, password);
+                                const user = userCredential.user;
+
+                                const userRef = ref(database, 'users/' + user.uid);
+                                const snapshot = await get(userRef);
+
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    welcomeMsg.style.display = "block";
+                                    userNameSpan.textContent = userData.firstName;
+                                    errorMessageDiv.style.display = "none";
+
+                                    // Redirect to the home page
+                                    window.location.href = "./intro/home-f.html";
+                                } else {
+                                    errorMessageDiv.textContent = "User not found in the database";
+                                    errorMessageDiv.style.display = "block";
+                                }
+                            } catch (error) {
+                                errorMessageDiv.textContent = `Login failed: ${error.message}`;
+                                errorMessageDiv.style.display = "block";
+                            } finally {
+                                loadingSpinner.style.display = "none"; // Hide loading spinner
+                            }
+                        } else {
+                            console.error("Email or password element not found");
+                        }
+                    });
+                } else {
+                    console.error("Element with id 'loginForm' not found");
+                }
+            });
+        </script>
+    </main>
+</body>
+
+</html>

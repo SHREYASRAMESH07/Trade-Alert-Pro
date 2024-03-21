@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Dashboard</title>
+    <style>
+        /* Styles go here */
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Recent Trades</h1>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Apple (AAPL) Stock Widget -->
+        <section class="widget-section">
+            <h2>Apple (AAPL) Stock</h2>
+            <div class="tradingview-widget-container stock-widget">
+                <!-- Replace the following script with the actual AAPL Stock Widget script -->
+                <script src="https://s3.tradingview.com/tv.js"></script>
+                <script>
+                    var symbol = 'AAPL';
+
+                    // TradingView widget configuration
+                    var widget = new TradingView.widget({
+                        container_id: 'tv_chart_container',
+                        symbol: `NASDAQ:${symbol}`,
+                        interval: 'D',
+                        timezone: 'Etc/UTC',
+                        theme: 'light',
+                        style: '1',
+                        locale: 'en',
+                        toolbar_bg: '#f1f3f6',
+                        enable_publishing: false,
+                        hide_top_toolbar: true,
+                        save_image: false,
+                        studies: ['MA@tv-basicstudies'],
+                        show_popup_button: true,
+                        popup_width: '1000',
+                        popup_height: '650'
+                    });
+
+                    // Function to get the current stock value
+                    function getCurrentStockValue() {
+                        var currentStockValue = widget.chart().dataSet().getLastVisiblePrice();
+                        return currentStockValue;
+                    }
+
+                    // Function to print the current stock value to the console
+                    function printStockValue() {
+                        var value = getCurrentStockValue();
+                        console.log('Current Stock Value:', value);
+                    }
+
+                    // Notification when the chart is fully loaded
+                    TradingView.onChartReady(function () {
+                        alert('Chart is fully loaded!');
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- Button to print the current stock value -->
+        <section class="widget-section">
+            <h2>Print Current Stock Value</h2>
+            <button onclick="printStockValue()">Print Stock Value</button>
+        </section>
+    </div>
+
+</body>
+</html>

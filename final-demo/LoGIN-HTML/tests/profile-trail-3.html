@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="../profile.css">
+</head>
+
+<body>
+    <main>
+        <section class="profile">
+            <div class="logo">
+                <img src="../Data/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>User Profile</h2>
+            <div id="userInfo">
+                <img src="https://i.ibb.co/Sc8T3K4/sample-profile-image.jpg" alt="Profile Image">
+                <p id="displayName">John Doe</p>
+                <p id="displayDob">Date of Birth: 1990-01-01</p>
+                <p id="displayMobile">Mobile: 1234567890</p>
+                <p id="displayExperience">Experience: 5 years</p>
+                <p id="displayNote">Note: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p id="displayFeedback">Feedback: Great service!</p>
+            </div>
+            <button class="edit-btn" id="editProfileBtn">Edit Profile</button>
+            <div class="overlay" id="emailOverlay">
+                <p class="email-sent" id="emailSentMessage">Email sent successfully!</p>
+            </div>
+        </section>
+
+        <form class="profile-form" id="editProfileForm">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="image">Profile Image URL</label>
+                <input type="text" id="image" required>
+            </div>
+            <div class="input-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="input-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" required>
+            </div>
+            <div class="input-group">
+                <label for="experience">Experience</label>
+                <input type="text" id="experience" required>
+            </div>
+            <div class="input-group">
+                <label for="note">Note</label>
+                <textarea id="note" rows="3" required></textarea>
+            </div>
+            <div class="input-group">
+                <label for="feedback">Feedback</label>
+                <textarea id="feedback" rows="3" required></textarea>
+            </div>
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+
+    <!-- Import Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+            authDomain: "tradealertprok.firebaseapp.com",
+            projectId: "tradealertprok",
+            storageBucket: "tradealertprok.appspot.com",
+            messagingSenderId: "170112773594",
+            appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+            measurementId: "G-17R8L9915W"
+        };
+
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        const profileSection = document.querySelector(".profile");
+        const editProfileForm = document.getElementById("editProfileForm");
+        const editProfileBtn = document.getElementById("editProfileBtn");
+        const emailOverlay = document.getElementById("emailOverlay");
+        const emailSentMessage = document.getElementById("emailSentMessage");
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                const userId = user.uid;
+                const userRef = firebase.database().ref('users/' + userId);
+                setProfileData(userRef);
+                profileSection.style.display = "block";
+            } else {
+                profileSection.style.display = "none";
+            }
+        });
+
+        editProfileBtn.addEventListener("click", () => {
+            editProfileForm.style.display = "block";
+            profileSection.style.display = "none";
+        });
+
+        editProfileForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newName = document.getElementById("name").value;
+            const newImage = document.getElementById("image").value;
+            const newDob = document.getElementById("dob").value;
+            const newMobile = document.getElementById("mobile").value;
+            const newExperience = document.getElementById("experience").value;
+            const newNote = document.getElementById("note").value;
+            const newFeedback = document.getElementById("feedback").value;
+
+            const userId = firebase.auth().currentUser.uid;
+            const userRef = firebase.database().ref('users/' + userId);
+
+            userRef.update({
+                name: newName,
+                image: newImage,
+                dob: newDob,
+                mobile: newMobile,
+                experience: newExperience,
+                note: newNote,
+                feedback: newFeedback
+            }).then(() => {
+                setProfileData(userRef);
+                profileSection.style.display = "block";
+                editProfileForm.style.display = "none";
+                showEmailSentMessage();
+                alert("Profile updated successfully!");
+            }).catch((error) => {
+                console.error("Error updating profile:", error);
+            });
+        });
+
+        function setProfileData(userRef) {
+            userRef.once('value').then((snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const displayName = document.getElementById("displayName");
+                    const displayImage = document.getElementById("displayImage");
+                    const displayDob = document.getElementById("displayDob");
+                    const displayMobile = document.getElementById("displayMobile");
+                    const displayExperience = document.getElementById("displayExperience");
+                    const displayNote = document.getElementById("displayNote");
+                    const displayFeedback = document.getElementById("displayFeedback");
+
+                    displayName.textContent = "Name: " + userData.name;
+                    displayImage.src = userData.image;
+                    displayDob.textContent = "Date of Birth: " + userData.dob;
+                    displayMobile.textContent = "Mobile Number: " + userData.mobile;
+                    displayExperience.textContent = "Experience: " + userData.experience;
+                    displayNote.textContent = "Note: " + userData.note;
+                    displayFeedback.textContent = "Feedback: " + userData.feedback;
+                } else {
+                    console.error("User data not found");
+                }
+            }).catch((error) => {
+                console.error("Error retrieving user data:", error);
+            });
+        }
+
+        function sendEmail() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000);
+            });
+        }
+
+        function showEmailSentMessage() {
+            emailOverlay.classList.add("active");
+            emailSentMessage.classList.add("active");
+            setTimeout(() => {
+                emailOverlay.classList.remove("active");
+                emailSentMessage.classList.remove("active");
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

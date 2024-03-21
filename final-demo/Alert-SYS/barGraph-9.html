@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Bar Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      width: 80%;
+      margin: auto;
+    }
+
+    /* Error popup styles */
+    .error-popup {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Live Bar Graph</h1>
+
+<div style="width: 80%; margin: auto;">
+  <canvas id="barChart" width="800" height="400"></canvas>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('barChart').getContext('2d');
+
+    const config = {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Volume',
+          data: [],
+          backgroundColor: 'rgba(255, 99, 132, 0.5)', // Adjusted color for better visibility
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+        }],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'category',
+            position: 'bottom',
+          },
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+
+    const barChart = new Chart(ctx, config);
+
+    // Function to fetch live data and update the chart
+    function updateChart() {
+      fetch('/api/loadedData')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Extract relevant data for the bar chart
+          const timestamps = data.map(record => record.timestamp);
+          const volumeData = data.map(record => record.volume);
+
+          // Update chart data
+          config.data.labels = timestamps;
+          config.data.datasets[0].data = volumeData;
+
+          // Update the chart
+          barChart.update();
+        })
+        .catch(error => {
+          showErrorPopup(`Error fetching live data: ${error.message}`);
+        });
+    }
+
+    // Fetch live data and update the chart every 5 seconds
+    setInterval(updateChart, 5000);
+
+    function showErrorPopup(message) {
+      const errorPopup = document.createElement('div');
+      errorPopup.className = 'error-popup';
+      errorPopup.textContent = message;
+      document.body.appendChild(errorPopup);
+
+      setTimeout(() => {
+        document.body.removeChild(errorPopup);
+      }, 5000); // Remove the error popup after 5 seconds
+    }
+  });
+</script>
+
+</body>
+</html>

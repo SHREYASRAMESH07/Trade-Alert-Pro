@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Trade Market</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #3498db;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      width: 80%;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Real-Time Trade Market</h1>
+
+<div style="width: 80%;">
+  <canvas id="tradeChart" width="800" height="400"></canvas>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('tradeChart').getContext('2d');
+
+    const config = {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Stock Price',
+          data: [],
+          fill: false,
+          borderColor: '#3498db',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.4,
+        }],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom',
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)',
+              lineWidth: 1,
+            }
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          }
+        }
+      },
+    };
+
+    const tradeChart = new Chart(ctx, config);
+
+    // Simulated WebSocket connection
+    const socket = new WebSocket('ws://example.com/trade-market');
+
+    socket.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      const now = new Date();
+      
+      tradeChart.data.labels.push(now.getTime());
+      tradeChart.data.datasets[0].data.push(data.stockPrice);
+
+      // Keep a maximum of 20 data points for better performance
+      if (tradeChart.data.labels.length > 20) {
+        tradeChart.data.labels.shift();
+        tradeChart.data.datasets[0].data.shift();
+      }
+
+      tradeChart.update();
+    };
+
+    socket.onclose = function (event) {
+      console.error('WebSocket closed:', event);
+    };
+  });
+</script>
+
+</body>
+</html>

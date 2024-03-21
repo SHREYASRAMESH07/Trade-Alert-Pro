@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .profile {
+            display: none;
+            /* Hidden by default */
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .profile,
+        .logo {
+            animation: fadeIn 1s ease;
+        }
+
+        /* Additional Styles for Enhanced Look */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            z-index: -1;
+        }
+
+        button {
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="profile">
+            <div class="logo">
+                <img src="./TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>User Profile</h2>
+            <div id="userInfo">
+                <p id="displayFirstName"></p>
+                <p id="displayLastName"></p>
+                <p id="displayEmail"></p>
+            </div>
+            <button id="signOutBtn">Sign Out</button>
+        </section>
+    </main>
+
+    <!-- Import Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+
+    <script>
+        // Replace with your Firebase project configuration
+        var firebaseConfig = {
+           
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+          
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var auth = firebase.auth();
+        var database = firebase.database();
+
+        var profileSection = document.querySelector(".profile");
+        var signOutBtn = document.getElementById("signOutBtn");
+
+        // Listen for changes in authentication state
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in
+                var userId = user.uid;
+
+                // Retrieve user data from the database
+                var userRef = firebase.database().ref('users/' + userId);
+
+                // Update the profile section with user details
+                setProfileData(userRef);
+
+                // Show the profile section
+                profileSection.style.display = "block";
+            } else {
+                // User is signed out
+                // Hide the profile section
+                profileSection.style.display = "none";
+            }
+        });
+
+        signOutBtn.addEventListener("click", function () {
+            firebase.auth().signOut()
+                .then(function () {
+                    alert("Successfully signed out.");
+                    // Redirect to login page or perform other actions after sign out
+                })
+                .catch(function (error) {
+                    console.error("Sign out error:", error);
+                });
+        });
+
+        // Function to set profile data
+        function setProfileData(userRef) {
+            // Assuming user data is structured like { firstName, lastName, email }
+            userRef.get()
+                .then(function (snapshot) {
+                    if (snapshot.exists()) {
+                        var userData = snapshot.val();
+                        var displayFirstName = document.getElementById("displayFirstName");
+                        var displayLastName = document.getElementById("displayLastName");
+                        var displayEmail = document.getElementById("displayEmail");
+
+                        displayFirstName.textContent = "First Name: " + userData.firstName;
+                        displayLastName.textContent = "Last Name: " + userData.lastName;
+                        displayEmail.textContent = "Email: " + userData.email;
+                    } else {
+                        console.error("User data not found");
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error retrieving user data:", error);
+                });
+        }
+    </script>
+</body>
+
+</html>

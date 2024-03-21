@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="barChart"></canvas>
+
+  <script>
+    // Fetch data from your API endpoint
+    fetch('/api/data')
+      .then(response => response.json())
+      .then(data => {
+        const timestamps = data.map(record => record.timestamp);
+        const volumeData = data.map(record => record.volume);
+
+        // Create a bar chart using Chart.js
+        const ctx = document.getElementById('barChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: timestamps,
+            datasets: [{
+              label: 'Volume Data',
+              data: volumeData,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'linear',
+                position: 'bottom'
+              }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+      });
+  </script>
+</body>
+</html>

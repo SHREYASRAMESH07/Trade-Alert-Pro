@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>TradeAlertPro-Services</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #4CAF50, #007BFF);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            max-width: 120px;
+            margin-right: 10px;
+        }
+
+        nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0); /* Transparent background */
+    padding: 15px 0;
+    border-bottom: 2px solid #fff;
+    transition: background 0.3s ease; /* Add transition for a smooth effect */
+}
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        .services-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+
+        .feature {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Adjusted colors for better visibility */
+        h2,
+        h3 {
+            color: #007BFF;
+        }
+
+        p {
+            color: #333;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #4CAF50, #007BFF);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        header:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+       
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .widget-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .widget-container:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .call-to-action {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .call-to-action a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .call-to-action a:hover {
+            background: #45a049;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="../Data/TAP.png" alt="TradeAlertPro Logo">
+
+        <nav>
+            <ul>
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./learn.html">Learn</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        <div id="home" class="hero">
+            <h1>Welcome to TradeAlertPro</h1>
+            <p>Your gateway to smart trading and market insights.</p>
+        </div>
+
+
+        <marquee><h1>Stock and Crypto Tracker</h1></marquee>
+
+        <!-- Forex Cross Rates Widget -->
+        <div class="widget-container">
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+            {
+                "width": "100%",
+                "height": "100%",
+                "currencies": ["EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD", "CNY", "TRY", "SEK", "NOK", "DKK", "ZAR", "HKD", "SGD", "THB", "MXN", "IDR", "KRW", "PLN", "ISK", "KWD", "PHP", "MYR", "INR", "TWD", "SAR", "AED", "RUB", "ILS", "ARS", "CLP", "COP", "PEN", "UYU"],
+                "isTransparent": false,
+                "colorTheme": "dark",
+                "locale": "en"
+            }
+            </script>
+        </div>
+
+        <marquee><h3>Index of Apple</h3></marquee>
+
+        <!-- Apple (AAPL) Stock Widget -->
+        <div class="widget-container">
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": "NASDAQ:AAPL",
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "enable_publishing": true,
+                    "backgroundColor": "rgba(66, 66, 66, 1)",
+                    "gridColor": "rgba(151, 0, 0, 0.06)",
+                    "withdateranges": true,
+                    "range": "YTD",
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": true,
+                    "details": true,
+                    "hotlist": true,
+                    "calendar": true,
+                    "studies": ["STD;Average%Day%Range"],
+                    "show_popup_button": true,
+                    "popup_width": "1000",
+                    "popup_height": "650",
+                    "container_id": "tradingview_68ea1"
+                });
+            </script>
+        </div>
+
+        <marquee><h3>Market Overview Widget</h3></marquee>
+
+
+        <!-- Market Overview Widget -->
+        <div class="widget-container">
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+                "colorTheme": "dark",
+                "dateRange": "12M",
+                "showChart": false,
+                "locale": "en",
+                "isTransparent": false,
+                "showSymbolLogo": true,
+                "showFloatingTooltip": false,
+                "width": "100%",
+                "height": "500",
+                "tabs": [
+                    { "title": "Indices", "symbols": [{ "s": "FOREXCOM:SPXUSD", "d": "S&P 500" }, { "s": "FOREXCOM:NSXUSD", "d": "US 100" }, { "s": "FOREXCOM:DJI", "d": "Dow 30" }, { "s": "INDEX:NKY", "d": "Nikkei 225" }, { "s": "INDEX:DEU40", "d": "DAX Index" }, { "s": "FOREXCOM:UKXGBP", "d": "UK 100" }], "originalTitle": "Indices" },
+                    { "title": "Futures", "symbols": [{ "s": "CME_MINI:ES1!", "d": "S&P 500" }, { "s": "CME:6E1!", "d": "Euro" }, { "s": "COMEX:GC1!", "d": "Gold" }, { "s": "NYMEX:CL1!", "d": "WTI Crude Oil" }, { "s": "NYMEX:NG1!", "d": "Gas" }, { "s": "CBOT:ZC1!", "d": "Corn" }], "originalTitle": "Futures" },
+                    { "title": "Bonds", "symbols": [{ "s": "CBOT:ZB1!", "d": "T-Bond" }, { "s": "CBOT:UB1!", "d": "Ultra T-Bond" }, { "s": "EUREX:FGBL1!", "d": "Euro Bund" }, { "s": "EUREX:FBTP1!", "d": "Euro BTP" }, { "s": "EUREX:FGBM1!", "d": "Euro BOBL" }], "originalTitle": "Bonds" },
+                    { "title": "Forex", "symbols": [{ "s": "FX:EURUSD", "d": "EUR to USD" }, { "s": "FX:GBPUSD", "d": "GBP to USD" }, { "s": "FX:USDJPY", "d": "USD to JPY" }, { "s": "FX:USDCHF", "d": "USD to CHF" }, { "s": "FX:AUDUSD", "d": "AUD to USD" }, { "s": "FX:USDCAD", "d": "USD to CAD" }], "originalTitle": "Forex" }
+                ]
+            }
+            </script>
+        </div>
+
+        <marquee><h3> Crypto Coins Heatmap Widget</h3></marquee>
+
+
+        <!-- Crypto Coins Heatmap Widget -->
+        <div class="widget-container">
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+            {
+                "dataSource": "CryptoWithoutBTC",
+                "blockSize": "market_cap_calc",
+                "blockColor": "change",
+                "locale": "en",
+                "symbolUrl": "",
+                "colorTheme": "dark",
+                "hasTopBar": true,
+                "isDataSetEnabled": true,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "width": "100%",
+                "height": "500"
+            }
+            </script>
+        </div>
+
+        
+
+    <footer>
+        <p>&copy; 2023 TradeAlertPro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

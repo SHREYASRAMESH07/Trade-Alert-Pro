@@ -1,0 +1,13 @@
+{
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "client_email": "firebase-adminsdk-e7a2c@tradealertprok.iam.gserviceaccount.com",
+  "client_id": "117354588361881529442",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-e7a2c%40tradealertprok.iam.gserviceaccount.com",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCweOU3i5oROziD\nysvZtUwKQC7U4S8HPCF/mO1sYuTpjQqX0VPkK/EyoJSQvN4y86qWYPhb2Cwqupv9\nPIb7lA2KF1jdIOt2fZSm5vTGUFRhXcsS1U4Pv3exojc0WyRbVgjJjTtjYuGeCk5J\ntFU8gAbaU9wClUkWT+YmbQxihj++UXaVDBND4VoTS1DjMP/F8MFCsmUZKfiKncsU\nw+mST5CXLu+US3CJBX8WZBiLmrzOIDSUUCAhz4H70rr9hc+2a8ptSiAN2c6gCstv\n86gw3IwUHfJ7C3h4+6MtLB8MSSyShx83OVkXL4tfRnDw2IDrzVLe3+eZAVchmQrp\nZXnxehkTAgMBAAECggEABytaMJgA0dtkj+Igxv75EF+MJ4TgerxEJiFp3+Hip+Rd\nfk54SIhKe8KPVpP9uPcyQnq9DEorfS7ooHChkT3yEN6i8xTfzAgNDnzKi/X+f5gm\nZGT7D2O5cqOC96MORpGnuLx+oaqGPPvxM0hawCL5ZExM32P+PKRRVtVOUABhPZOT\nWnF4PpLu+nS1eH1Bib4NshFcbYHkFSCdqMKO15tWqggrJYC7uotgY2Rld6oNTJS3\nvOXKranizxydyt7yBDHz5H3qSMIRBddL7fpaobahyaxmjfqBXMZZLeXDB+Gsiw9k\nR7GhdiLJbwM1177ndt3yYVk9UioNTsz2e8qUJkljNQKBgQDlN4HaYT9qTD243p+b\n4ypvr+QkX2tk2b+oeD4celZ20zcXf0w/sfjSOThj2gZ99RAWM4o4QHEtecc+IMof\nBIFfMoq4O3Am3KQUWegVmW/eb++7JIMpIZSQvyl43afXzTtpQb/R7nnp1iNPY8sx\niR9zas9eaU68w7EJB9+oDwM97wKBgQDFF6fd06oCGtR81hsG0AQ+z//2gp6lehdR\nKPouYcA/8xkL/JYTiRwQ1Zh3GoZzktLXHp5txhqL/KTCqyUU6wgrPzBnUxN6Swnb\nKgRmHZOqxok/nlnWKkmz16MVLH7FuYYKkBfGvJzdmc4yPL4og8NvUFVQqMNV+Fh5\nzc5SpIo7HQKBgQCwQsrb/0QgnZgo/SiHW1xanks1nRqcZsV261/3ziuHHEyVCRK9\nOEI6hj3SqumrGjPQnrl/IC7n5WlNYTGMQI6rgdYibbKEb87Mx4Ysdd0Mk88pfZ5O\nlsADvrxJcUmMLQmumxzCdjvRkRV+CyNJaESDIHNuClS9203bv+5A8apwiQKBgAcg\nnd91whYlZj3FeGC8sQqcdwMxIg+V5LX4p2N6AXvOjL9UOREnyi4Jq2PTP716N8mz\nv8L0gQ1C66pmigbBoR//Pv7dkDzB7e9RC6utsiNg3qHAVjtaeCPaznj7jPIVjXVg\nVJvJQlr5Lu2+KJpKeYzS+OLb14SKYJi3CpkOfjk5AoGARtcmpXpWDY6+pGNEaJ4Z\n/bHqTyCJ8LqMDZ7SvBnP8iknsqXeoIskj3u2Jnl5lsuOCKj0ounrJRwO6GdR5AYm\neJuyJka01fzxid1cDy7FfwWqv4ul90PTa5Q9dhCS4urRx/alAJ1ESqB2TTc6i7IG\n4PMF/0FL9PUa1lz2enZwrn0=\n-----END PRIVATE KEY-----\n",
+  "private_key_id": "21ac7a91f0aee597fda46a482aa1fb88e1faac4d",
+  "project_id": "tradealertprok",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "type": "service_account",
+  "universe_domain": "googleapis.com"
+}

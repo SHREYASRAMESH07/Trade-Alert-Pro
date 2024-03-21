@@ -1,0 +1,26 @@
+<!-- setAlert.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Alert Threshold</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; text-align: center; margin: 50px;">
+  <h1>Set Alert Threshold</h1>
+  <p>Enter the new threshold value:</p>
+  <form id="alertForm">
+    <input type="number" id="thresholdInput" placeholder="Enter threshold" required>
+    <button type="button" onclick="setAlertThreshold()" style="margin: 10px;">Set Threshold</button>
+  </form>
+  <script>
+    function setAlertThreshold() {
+      const thresholdInput = document.getElementById('thresholdInput').value;
+      fetch(`/setAlertThreshold/${thresholdInput}`, { method: 'POST' })
+        .then(response => response.text())
+        .then(message => alert(message))
+        .catch(error => console.error('Error setting alert threshold:', error));
+    }
+  </script>
+</body>
+</html>

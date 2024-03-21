@@ -1,0 +1,223 @@
+ body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Password strength indicator styles */
+#passwordStrength {
+    font-size: 16px; /* Adjust the font size */
+    color: #ff5555; /* Choose a contrasting color */
+    margin-top: 10px; /* Add some top margin for separation */
+}
+
+/* Password policy information styles */
+.password-strength {
+    font-size: 14px; /* Adjust the font size */
+    color: #888; /* Choose a slightly lighter color */
+    margin-top: 5px; /* Add some top margin for separation */
+}
+
+/* Terms and Privacy message styles */
+.terms-links p {
+    font-size: 14px; /* Adjust the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Choose a color that contrasts well */
+    text-align: center; /* Center-align the text */
+    margin-top: 15px; /* Add some top margin for separation */
+}
+
+        section h2 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 24px); /* Adjusted width to accommodate the checkbox */
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            display: inline-block;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .show-password-label {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 0 12px;
+            color: #333;
+        }
+
+        .show-password-label:hover {
+            color: #2980b9;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .login-link {
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #2980b9;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        form,
+        .logo {
+            animation: fadeIn 1s ease;
+        }
+
+        /* Checkbox Styles */
+        .input-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .input-group.error {
+            border: 1px solid #ff0000;
+        }
+
+        .availability-status,
+        .password-strength,
+        .error-message {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        #userInfo,
+        #loginLink {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        .login-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #userInfo {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }

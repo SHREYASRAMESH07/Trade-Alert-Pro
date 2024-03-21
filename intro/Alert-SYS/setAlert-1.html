@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Alert Threshold</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    h1 {
+      color: #3498db;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #297fb8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Set Alert Threshold</h1>
+  
+  <form id="thresholdForm">
+    <label for="thresholdInput">Enter Alert Threshold:</label>
+    <input type="number" id="thresholdInput" name="threshold" min="1" required>
+    <br>
+    <button type="submit">Set Threshold</button>
+  </form>
+
+  <script>
+    document.getElementById('thresholdForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const thresholdValue = document.getElementById('thresholdInput').value;
+
+      // Make a POST request to set the alert threshold
+      fetch(`/setAlertThreshold/${thresholdValue}`, { method: 'POST' })
+        .then(response => response.text())
+        .then(message => {
+          alert(message);
+        })
+        .catch(error => {
+          console.error('Error setting alert threshold:', error);
+          alert('Error setting alert threshold. Please try again.');
+        });
+    });
+  </script>
+</body>
+</html>

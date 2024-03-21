@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .login-link,
+        .signup-link {
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        .login-link a,
+        .signup-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover,
+        .signup-link a:hover {
+            color: #2980b9;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        form,
+        .logo {
+            animation: fadeIn 1s ease;
+        }
+        main {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+ 
+
+        h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        .login-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #userInfo {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="../Data/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Forgot Your Password?</h2>
+        </section>
+
+        <form id="forgotPasswordForm">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <button type="submit">Reset Password</button>
+            <p class="login-link"><a href="./login-fd.html">Remember your password? Login here</a></p>
+            <p class="signup-link">Don't have an account? <a href="./create-fd.html">Sign up here</a></p>
+        </form>
+    </main>
+
+    <!-- Import Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+        import { getAuth, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+
+       // Initialize Firebase
+       const firebaseConfig = {
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+            };
+        const firebaseApp = initializeApp(firebaseConfig);
+        const auth = getAuth(firebaseApp);
+
+        const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+
+        forgotPasswordForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    alert("Password reset email sent. Check your email for further instructions.");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(`Password reset failed: ${errorCode} - ${errorMessage}`);
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>Unique Dashboard</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #3494e6, #ec6ead);
+            color: #fff;
+        }
+
+        header {
+            background: linear-gradient(to right, #1d2b64, #f8cdda);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1d2b64;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .widget-section {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin-bottom: 20px;
+            flex: 1;
+            max-width: 800px; /* Adjust the max-width as needed */
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .widget-section h2 {
+            color: #1d2b64;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .tradingview-widget-container {
+            height: 400px;
+            border: 2px solid #1d2b64;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        button {
+            background: linear-gradient(to right, #1d2b64, #3494e6);
+            color: #fff;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #3494e6, #1d2b64);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Recent Trades</h1>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Apple (AAPL) Stock Widget -->
+        <section class="widget-section">
+            <h2>Apple (AAPL) Stock</h2>
+            <div class="tradingview-widget-container stock-widget">
+                <!-- Replace the following script with the actual AAPL Stock Widget script -->
+                <script src="https://s3.tradingview.com/tv.js"></script>
+                <script>
+                    var symbol = 'AAPL';
+
+                    // TradingView widget configuration
+                    var widget = new TradingView.widget({
+                        container_id: 'tv_chart_container',
+                        symbol: `NASDAQ:${symbol}`,
+                        interval: 'D',
+                        timezone: 'Etc/UTC',
+                        theme: 'dark',
+                        style: '1',
+                        locale: 'en',
+                        toolbar_bg: '#1d2b64',
+                        enable_publishing: false,
+                        hide_top_toolbar: true,
+                        save_image: false,
+                        studies: ['MA@tv-basicstudies'],
+                        show_popup_button: true,
+                        popup_width: '1000',
+                        popup_height: '650'
+                    });
+
+                    // Notification when the chart is fully loaded
+                    TradingView.onChartReady(function () {
+                        alert('Chart is fully loaded!');
+                    });
+                </script>
+            </div>
+            <button>View Details</button>
+        </section>
+
+        <!-- Tesla (TSLA) Stock Widget -->
+        <section class="widget-section">
+            <h2>Tesla (TSLA) Stock</h2>
+            <div class="tradingview-widget-container stock-widget">
+                <!-- Replace the following script with the actual TSLA Stock Widget script -->
+                <script src="https://s3.tradingview.com/tv.js"></script>
+                <script>
+                    var symbolTesla = 'TSLA';
+
+                    // TradingView widget configuration for Tesla
+                    var widgetTesla = new TradingView.widget({
+                        container_id: 'tv_chart_container_tesla',
+                        symbol: `NASDAQ:${symbolTesla}`,
+                        interval: 'D',
+                        timezone: 'Etc/UTC',
+                        theme: 'dark',
+                        style: '1',
+                        locale: 'en',
+                        toolbar_bg: '#1d2b64',
+                        enable_publishing: false,
+                        hide_top_toolbar: true,
+                        save_image: false,
+                        studies: ['MA@tv-basicstudies'],
+                        show_popup_button: true,
+                        popup_width: '1000',
+                        popup_height: '650'
+                    });
+
+                    // Notification when the Tesla chart is fully loaded
+                    TradingView.onChartReady(function () {
+                        alert('Tesla Chart is fully loaded!');
+                    });
+                </script>
+            </div>
+            <button>View Details</button>
+        </section>
+
+        <!-- Google (GOOGL) Stock Widget -->
+        <section class="widget-section">
+            <h2>Google (GOOGL) Stock</h2>
+            <div class="tradingview-widget-container stock-widget">
+                <!-- Replace the following script with the actual GOOGL Stock Widget script -->
+                <script src="https://s3.tradingview.com/tv.js"></script>
+                <script>
+                    var symbolGoogle = 'GOOGL';
+
+                    // TradingView widget configuration for Google
+                    var widgetGoogle = new TradingView.widget({
+                        container_id: 'tv_chart_container_google',
+                        symbol: `NASDAQ:${symbolGoogle}`,
+                        interval: 'D',
+                        timezone: 'Etc/UTC',
+                        theme: 'dark',
+                        style: '1',
+                        locale: 'en',
+                        toolbar_bg: '#1d2b64',
+                        enable_publishing: false,
+                        hide_top_toolbar: true,
+                        save_image: false,
+                        studies: ['MA@tv-basicstudies'],
+                        show_popup_button: true,
+                        popup_width: '1000',
+                        popup_height: '650'
+                    });
+
+                    // Notification when the Google chart is fully loaded
+                    TradingView.onChartReady(function () {
+                        alert('Google Chart is fully loaded!');
+                    });
+                </script>
+            </div>
+            <button>View Details</button>
+        </section>
+    </div>
+
+</body>
+</html>

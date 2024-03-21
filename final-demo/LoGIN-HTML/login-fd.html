@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="../styles/login-fd.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .checkbox-container label {
+            font-size: 14px;
+            color: #333;
+            margin-left: 8px;
+        }
+
+        .error-message {
+            color: #ff0000;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        form,
+        .logo {
+            animation: fadeIn 1s ease;
+        }
+        main {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+ 
+
+        h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555555;
+        }
+
+        .login-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #userInfo {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="../Data/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Login to Your Account</h2>
+            <div id="welcomeMsg" style="display: none;">Welcome, <span id="userName"></span>!</div>
+        </section>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="checkbox-container">
+                <div class="show-password-container">
+                    <input type="checkbox" id="showPassword">
+                    <label for="showPassword">Show Password</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+                </div>
+            </div>
+            <button type="submit">Login</button>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <div class="error-message" id="errorMessage"></div>
+            <p class="forgot-password"><a href="./forget-fd.html">Forgot your password?</a></p>
+            <div class="signup-link">Don't have an account? <a href="./create-fd.html">Sign up here</a></div>
+         <!-- Privacy policy and terms of service links added -->
+         <p class="signup-link">By logging in, you agree to our <a href="./privacy-policy.html">Privacy Policy</a> and <a href="./terms-of-service.html">Terms of Service</a>.</p>
+        </form>
+        </form>
+
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+            import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+            import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js';
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBkaTBfuWHIRIT_nGFu6Fui5F39kcNblnE",
+                authDomain: "tradealertprok.firebaseapp.com",
+                projectId: "tradealertprok",
+                storageBucket: "tradealertprok.appspot.com",
+                messagingSenderId: "170112773594",
+                appId: "1:170112773594:web:8c223ab2ceb0f30373a4e3",
+                measurementId: "G-17R8L9915W"
+            };
+
+            const firebaseApp = initializeApp(firebaseConfig);
+            const auth = getAuth(firebaseApp);
+            const database = getDatabase(firebaseApp);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const loginForm = document.getElementById("loginForm");
+                const welcomeMsg = document.getElementById("welcomeMsg");
+                const userNameSpan = document.getElementById("userName");
+                const errorMessageDiv = document.getElementById("errorMessage");
+                const loadingSpinner = document.getElementById("loadingSpinner");
+                const showPasswordCheckbox = document.getElementById("showPassword");
+                const passwordInput = document.getElementById("password");
+
+                if (loginForm) {
+                    loginForm.addEventListener("submit", async function (e) {
+                        e.preventDefault();
+
+                        const emailElement = document.getElementById("email");
+
+                        if (emailElement) {
+                            const emailOrMobile = emailElement.value;
+
+                            try {
+                                loadingSpinner.style.display = "block"; // Show loading spinner
+
+                                let password = passwordInput.value;
+
+                                // If "Show Password" is checked, display the actual password
+                                if (showPasswordCheckbox.checked) {
+                                    password = passwordInput.value;
+                                }
+
+                                const userCredential = await signInWithEmailAndPassword(auth, emailOrMobile, password);
+                                const user = userCredential.user;
+
+                                const userRef = ref(database, 'users/' + user.uid);
+                                const snapshot = await get(userRef);
+
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    welcomeMsg.style.display = "block";
+                                    userNameSpan.textContent = userData.firstName;
+                                    errorMessageDiv.style.display = "none";
+
+                                    // Redirect to the home page
+                                    window.location.href = "./dashboard.html";
+                                } else {
+                                    errorMessageDiv.textContent = "User not found in the database";
+                                    errorMessageDiv.style.display = "block";
+                                }
+                            } catch (error) {
+                                // Handle different types of errors
+                               // Handle different types of errors
+errorMessageDiv.style.color = "#ff0000"; // Set error message color to red
+if (error.code === "auth/user-not-found") {
+    errorMessageDiv.textContent = "User not found. Please check your email or password.";
+} else if (error.code === "auth/wrong-password" || error.code === "auth/invalid-login-credentials") {
+    errorMessageDiv.textContent = "Incorrect email or password. Please try again.";
+} else if (error.code === "auth/invalid-email") {
+    errorMessageDiv.textContent = "Invalid email format. Please provide a valid email address.";
+} else if (error.code === "auth/too-many-requests") {
+    errorMessageDiv.textContent = "Too many login attempts. Please try again later.";
+} else {
+    errorMessageDiv.textContent = `Login failed: ${error.message}`;
+}
+
+                                errorMessageDiv.style.display = "block";
+                            } finally {
+                                loadingSpinner.style.display = "none"; // Hide loading spinner
+                            }
+                        } else {
+                            console.error("Email element not found");
+                        }
+                    });
+                } else {
+                    console.error("Element with id 'loginForm' not found");
+                }
+
+                // Toggle password visibility
+                showPasswordCheckbox.addEventListener("change", function () {
+                    passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+                });
+            });
+        </script>
+    </main>
+</body>
+
+</html>

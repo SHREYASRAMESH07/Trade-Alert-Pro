@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .login-link,
+        #loginLink {
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        .login-link a,
+        #loginLink a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover,
+        #loginLink a:hover {
+            color: #2980b9;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        form,
+        .logo,
+        #userInfo,
+        #loginLink {
+            animation: fadeIn 1s ease;
+        }
+
+        /* Checkbox Styles */
+        .input-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .show-password-label {
+            position: relative;
+            cursor: pointer;
+            padding-left: 25px;
+            margin-top: 5px;
+            display: inline-block;
+            color: #333;
+        }
+
+        .show-password-label:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #3498db;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        .show-password-label:after {
+            content: "Show Password";
+            position: absolute;
+            left: 30px;
+            top: -2px;
+            font-size: 14px;
+        }
+
+        .input-group input[type="checkbox"]:checked + .show-password-label:before {
+            border-color: #2980b9;
+        }
+
+        .input-group input[type="checkbox"]:checked + .show-password-label:after {
+            content: "Hide Password";
+        }
+
+        /* Additional Styles */
+        .input-group.error {
+            border: 1px solid #ff0000;
+        }
+
+        .availability-status {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .password-strength {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+
+        /* Additional Styles End */
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="../TradeAlertPro-Test-2/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Create Your Account</h2>
+        </section>
+
+        <form id="createAccountForm">
+            <div class="input-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="input-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+                <!-- Email availability status -->
+                <div id="emailAvailability" class="availability-status"></div>
+            </div>
+            <!-- Inside the form element -->
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="password" required>
+                    <label for="showPassword" class="show-password-label">
+                        <input type="checkbox" id="showPassword"> Show Password
+                    </label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="confirmPassword" required>
+                    <label for="showConfirmPassword" class="show-password-label">
+                        <input type="checkbox" id="showConfirmPassword"> Show Password
+                    </label>
+                </div>
+            </div>
+
+            <!-- Password strength indicator -->
+            <div id="passwordStrength" class="password-strength"></div>
+            <!-- Password policy information -->
+            <div class="password-strength">
+                Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a digit, and a special character.
+            </div>
+            <!-- Terms of Service and Privacy Policy links -->
+            <div class="terms-links">
+                <p>By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </div>
+            <!-- Button to submit the form -->
+            <button type="submit">Get Started</button>
+            <!-- Login link for existing members -->
+            <p class="login-link">Already a member? <a href="#" id="loginLink">Login here</a></p>
+            <!-- Display error messages -->
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+
+        <div id="userInfo" style="display: none;">
+            <h3>User Information</h3>
+            <p id="displayFirstName"></p>
+            <p id="displayLastName"></p>
+            <p id="displayEmail"></p>
+        </div>
+
+        <!-- Import Firebase SDK -->
+        <script type="module">
+            // Your existing Firebase imports
+
+            const createAccountForm = document.getElementById("createAccountForm");
+            const userInfoDiv = document.getElementById("userInfo");
+            const displayFirstName = document.getElementById("displayFirstName");
+            const displayLastName = document.getElementById("displayLastName");
+            const displayEmail = document.getElementById("displayEmail");
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+            const passwordInput = document.getElementById("password");
+            const passwordStrengthIndicator = document.getElementById("passwordStrength");
+            const errorMessageDiv = document.getElementById("errorMessage");
+            const loginLink = document.getElementById("loginLink");
+
+            passwordInput.addEventListener("input", function () {
+                const strength = calculatePasswordStrength(passwordInput.value);
+                passwordStrengthIndicator.textContent = `Password Strength: ${strength}`;
+            });
+
+            createAccountForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                errorMessageDiv.textContent = "";
+                const inputGroups = createAccountForm.querySelectorAll(".input-group");
+                inputGroups.forEach(group => group.classList.remove("error"));
+
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    displayError("Passwords do not match. Please enter matching passwords.");
+                    return;
+                }
+
+                const firstName = document.getElementById("firstName").value;
+                const lastName = document.getElementById("lastName").value;
+                const email = document.getElementById("email").value;
+                const password = passwordInput.value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+
+                        const userData = {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        };
+
+                        set(ref(database, 'users/' + user.uid), userData);
+
+                        displayFirstName.textContent = "First Name: " + userData.firstName;
+                        displayLastName.textContent = "Last Name: " + userData.lastName;
+                        displayEmail.textContent = "Email: " + userData.email;
+
+                        userInfoDiv.style.display = "block";
+                        createAccountForm.style.display = "none";
+                        errorMessageDiv.style.display = "none";
+                        loginLink.style.display = "block";
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        displayError(`Account creation failed: ${errorCode} - ${errorMessage}`);
+                    });
+            });
+
+            // Show Password functionality
+            const showPasswordCheckbox = document.getElementById("showPassword");
+            const showConfirmPasswordCheckbox = document.getElementById("showConfirmPassword");
+
+            showPasswordCheckbox.addEventListener("change", function () {
+                passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+            });
+
+            showConfirmPasswordCheckbox.addEventListener("change", function () {
+                confirmPasswordInput.type = showConfirmPasswordCheckbox.checked ? "text" : "password";
+            });
+
+            // Email Availability Check
+            const emailInput = document.getElementById("email");
+            const emailAvailabilityDiv = document.getElementById("emailAvailability");
+
+            emailInput.addEventListener("input", function () {
+                const email = emailInput.value;
+                // Simulate email availability check (replace with server-side logic)
+                setTimeout(() => {
+                    const isEmailAvailable = Math.random() < 0.8; // Simulate 80% availability
+                    const availabilityMessage = isEmailAvailable ? "Email is available!" : "Email is not available.";
+                    emailAvailabilityDiv.textContent = availabilityMessage;
+                }, 500); // Simulate a 500ms delay
+            });
+
+            // Function to display error messages
+            function displayError(message) {
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.style.display = "block";
+            }
+
+            // Function to calculate password strength
+            function calculatePasswordStrength(password) {
+                const minLength = 8;
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasLowercase = /[a-z]/.test(password);
+                const hasDigit = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                let score = 0;
+                if (password.length >= minLength) {
+                    score += 1;
+                }
+                if (hasUppercase) {
+                    score += 1;
+                }
+                if (hasLowercase) {
+                    score += 1;
+                }
+                if (hasDigit) {
+                    score += 1;
+                }
+                if (hasSpecialChar) {
+                    score += 1;
+                }
+
+                if (score === 5) {
+                    return "Strong";
+                } else if (score >= 3) {
+                    return "Medium";
+                } else {
+                    return "Weak";
+                }
+            }
+        </script>
+    </main>
+</body>
+
+</html>

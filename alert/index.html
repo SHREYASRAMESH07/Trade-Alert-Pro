@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBM Market Data Dashboard</title>
+  <!-- Include Plotly.js library -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="graph-container" style="width: 80%; margin: auto;"></div>
+
+<script>
+// Fetch data from your API endpoint
+fetch('/api/data')
+  .then(response => response.json())
+  .then(data => {
+    // Extract relevant data for the graph
+    const timestamp = data.map(record => record.timestamp);
+    const closeData = data.map(record => record.close);
+    const volumeData = data.map(record => record.volume);
+
+    // Create Plotly graph
+    const trace1 = {
+      x: timestamp,
+      y: closeData,
+      type: 'scatter',
+      mode: 'lines',
+      name: 'Close Data',
+    };
+
+    const trace2 = {
+      x: timestamp,
+      y: volumeData,
+      type: 'bar',
+      name: 'Volume Data',
+      yaxis: 'y2', // Use a secondary y-axis for the bar chart
+    };
+
+    const layout = {
+      title: 'IBM Market Data',
+      xaxis: {
+        title: 'Timestamp',
+      },
+      yaxis: {
+        title: 'Close Data',
+      },
+      yaxis2: {
+        title: 'Volume Data',
+        overlaying: 'y',
+        side: 'right',
+      },
+    };
+
+    // Plot the graph
+    Plotly.newPlot('graph-container', [trace1, trace2], layout);
+  })
+  .catch(error => console.error('Error fetching data:', error));
+</script>
+
+</body>
+</html>

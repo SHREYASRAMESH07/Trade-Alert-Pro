@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Alert Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        section {
+            background: rgba(52, 152, 219, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        section:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        section h2 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 14px 24px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .feature {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(85, 198, 108, 0.9);
+            box-shadow: 0 0 20px rgba(207, 104, 104, 0.1);
+            margin-right: 10px;
+        }
+
+        .feature h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        section,
+        .logo,
+        .features,
+        .feature {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="logo">
+                <img src="../../Data/TAP.png" alt="Trade Alert Pro Logo">
+            </div>
+            <h2>Welcome to Trade Alert Pro</h2>
+            <p>Empower your trading journey with real-time alerts and advanced analytics. Stay ahead in the market and make informed decisions.</p>
+            <a href="../login-fd.html" class="cta-button">Get Started</a>
+        </section>
+
+        <div class="features">
+            <div class="feature">
+                <h3>Real-Time Alerts</h3>
+                <p>Receive instant notifications for market movements, trade signals, and important updates.</p>
+            </div>
+            <div class="feature">
+                <h3>Advanced Analytics</h3>
+                <p>Access powerful analytics tools to analyze market trends, historical data, and optimize your strategies.</p>
+            </div>
+            <div class="feature">
+                <h3>User-Friendly Interface</h3>
+                <p>Enjoy a seamless and intuitive interface designed for both beginners and experienced traders.</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Charts App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            max-width: 800px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Financial Charts</h1>
+
+    <canvas id="lineChart"></canvas>
+    <canvas id="barChart"></canvas>
+    <canvas id="candlestickChart"></canvas>
+
+    <script>
+        // Mock data for demonstration purposes
+        const lineChartData = {
+            labels: ["January", "February", "March", "April", "May"],
+            datasets: [{
+                label: "Stock Price",
+                data: [50, 45, 60, 55, 70],
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                fill: false
+            }]
+        };
+
+        const barChartData = {
+            labels: ["Product A", "Product B", "Product C", "Product D", "Product E"],
+            datasets: [{
+                label: "Sales",
+                data: [300, 500, 200, 700, 400],
+                backgroundColor: "rgba(255, 99, 132, 0.7)"
+            }]
+        };
+
+        const candlestickChartData = {
+            datasets: [{
+                data: [
+                    { t: '2019-01-01', o: 100, h: 150, l: 80, c: 120 },
+                    { t: '2019-02-01', o: 120, h: 180, l: 80, c: 140 },
+                    { t: '2019-03-01', o: 140, h: 200, l: 100, c: 160 },
+                    { t: '2019-04-01', o: 160, h: 220, l: 120, c: 180 },
+                    { t: '2019-05-01', o: 180, h: 250, l: 140, c: 200 }
+                ]
+            }]
+        };
+
+        // Create Line Chart
+        const lineChartContext = document.getElementById("lineChart").getContext("2d");
+        new Chart(lineChartContext, {
+            type: 'line',
+            data: lineChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Line Chart'
+                }
+            }
+        });
+
+        // Create Bar Chart
+        const barChartContext = document.getElementById("barChart").getContext("2d");
+        new Chart(barChartContext, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Bar Chart'
+                }
+            }
+        });
+
+        // Create Candlestick Chart
+        const candlestickChartContext = document.getElementById("candlestickChart").getContext("2d");
+        new Chart(candlestickChartContext, {
+            type: 'candlestick',
+            data: candlestickChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Candlestick Chart'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

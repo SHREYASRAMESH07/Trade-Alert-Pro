@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>TradeAlertPro</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            color: #ecf0f1;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        header:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            border-bottom: 2px solid #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .widget-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .widget-container:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .call-to-action {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .call-to-action a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .call-to-action a:hover {
+            background: #45a049;
+        }
+
+        .contact-info {
+            text-align: center;
+            color: #ccc;
+            margin-top: 20px;
+        }
+
+        .contact-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-developers h1 {
+            color: #ccc;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #6480ce;
+            max-width: 300px;
+        }
+
+        .contact h2 {
+            color: #fff;
+        }
+
+        .contact p {
+            color: #fff;
+            margin: 5px 0;
+        }
+
+        .contact a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact a:hover {
+            color: #4CAF50;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TradeAlertPro</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="./desk-f.html">Home</a></li>
+                <li><a href="./about-f.html">About</a></li>
+                <li><a href="./desk-f.html">Services</a></li>
+                <li><a href="./contact-f.html">Contact</a></li>
+                <li><a href="../log-trail.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="contact-info">
+            <h2>Let's Work Together. For any complaints or feedback, write a mail or give a call to our HelpDesk.</h2>
+        </div>
+
+        <img src="./help-desk.png" alt="Help Desk Image" class="contact-image">
+
+        <div class="contact-developers">
+            <h1>Contact Developers</h1>
+            <div class="contact-container">
+                <div class="contact">
+                    <h2>Vinay S (20201CSE0770)</h2>
+                    <p>7259255082</p>
+                    <p><a href="mailto:vinay@example.com">Send an email</a></p>
+                </div>
+
+                <div class="contact">
+                    <h2>Abhishek Pandey (20201CSE0759)</h2>
+                    <p>8538962038</p>
+                    <p><a href="mailto:abhishek@example.com">Send an email</a></p>
+                </div>
+
+                <div class="contact">
+                    <h2>Shivaditya Pandey (20201CSE0960)</h2>
+                    <p><a href="mailto:shivaditya@example.com">Send an email</a></p>
+                </div>
+
+                <div class="contact">
+                    <h2>Shreyas R (20201CSE0721)</h2>
+                    <p><a href="mailto:shreyas@example.com">Send an email</a></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 TradeAlertPro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </footer>
+    </div>
+</body>
+
+</html>

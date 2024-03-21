@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif; /* Using the Google Fonts */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #edf2f7, #f8f9fa);
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .widget-section {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tradingview-widget-container {
+            height: 400px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #stock-value {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>View List</h1>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Apple (AAPL) Stock Widget -->
+        <section class="widget-section">
+            <h2>Apple (AAPL) Stock</h2>
+            <div class="tradingview-widget-container stock-widget">
+                <!-- Replace the following script with the actual AAPL Stock Widget script -->
+                <script src="https://s3.tradingview.com/tv.js"></script>
+                <script>
+                    var symbol = 'AAPL';
+
+                    // TradingView widget configuration
+                    var widget = new TradingView.widget({
+                        container_id: 'tv_chart_container',
+                        symbol: `NASDAQ:${symbol}`,
+                        interval: 'D',
+                        timezone: 'Etc/UTC',
+                        theme: 'dark',
+                        style: '1',
+                        locale: 'en',
+                        toolbar_bg: '#f1f3f6',
+                        enable_publishing: false,
+                        hide_top_toolbar: true,
+                        save_image: false,
+                        studies: ['MA@tv-basicstudies'],
+                        show_popup_button: true,
+                        popup_width: '1000',
+                        popup_height: '650'
+                    });
+
+                    // Function to get the current stock value
+                    function getCurrentStockValue() {
+                        var currentStockValue = widget.chart().dataSet().getLastVisiblePrice();
+                        return currentStockValue;
+                    }
+
+                    // Function to update the stock value display
+                    function updateStockValue() {
+                        var stockValueElement = document.getElementById('stock-value');
+                        var value = getCurrentStockValue();
+                        stockValueElement.textContent = `Current Stock Value: $${value}`;
+                    }
+
+                    // Notification when the chart is fully loaded
+                    TradingView.onChartReady(function () {
+                        alert('Chart is fully loaded!');
+                        updateStockValue(); // Update stock value when the chart is ready
+                    });
+                </script>
+            </div>
+            <button onclick="updateStockValue()">Update Stock Value</button>
+            <p id="stock-value"></p>
+        </section>
+    </div>
+
+</body>
+</html>

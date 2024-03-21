@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Graph</title>
+    <!-- Use a specific version of Chart.js for stability -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.11.0"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        canvas {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch data from your API endpoint
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    const timestamps = data.map(record => record.timestamp);
+                    const volumeData = data.map(record => record.volume);
+
+                    // Create a bar chart using Chart.js
+                    const ctx = document.getElementById('barChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: timestamps,
+                            datasets: [{
+                                label: 'Volume Data',
+                                data: volumeData,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    type: 'linear',
+                                    position: 'bottom'
+                                },
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+
+</html>

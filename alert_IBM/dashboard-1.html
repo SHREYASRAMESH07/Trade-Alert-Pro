@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3"></script>
+</head>
+<body>
+
+<h1>Data Dashboard</h1>
+
+<div>
+  <button onclick="importData()">Import Data</button>
+  <button onclick="deleteData()">Delete Data</button>
+  <button onclick="showGraph()">Show Graph</button>
+</div>
+
+<div>
+  <h2>Alert Settings</h2>
+  <label for="threshold">Set Threshold Value:</label>
+  <input type="number" id="threshold" placeholder="Enter threshold value">
+  <button onclick="setThreshold()">Set Threshold</button>
+</div>
+
+<div style="width: 80%; margin: auto;">
+  <canvas id="barChart" width="800" height="400"></canvas>
+</div>
+
+<script>
+  let graphVisible = false; // Flag to track if the graph is visible
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('barChart').getContext('2d');
+
+    const config = {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Volume',
+          data: [],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        }],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'category',
+            position: 'bottom',
+          },
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+
+    const barChart = new Chart(ctx, config);
+
+    // Function to fetch live data and update the chart
+    function updateChart() {
+      fetch('/api/loadedData')
+        .then(response => response.json())
+        .then(data => {
+          // Extract relevant data for the bar chart
+          const timestamps = data.map(record => record.timestamp);
+          const volumeData = data.map(record => record.volume);
+
+          // Update chart data
+          config.data.labels = timestamps;
+          config.data.datasets[0].data = volumeData;
+
+          // Update the chart
+          barChart.update();
+        })
+        .catch(error => {
+          console.error('Error fetching live data:', error);
+        });
+    }
+
+    // Fetch live data and update the chart every 5 seconds
+    setInterval(updateChart, 5000);
+  });
+
+  // Function to import data
+  function importData() {
+    fetch('/importData')
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error('Error importing data:', error);
+      });
+  }
+
+  // Function to delete data
+  function deleteData() {
+    fetch('/deleteData', { method: 'DELETE' })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error('Error deleting data:', error);
+      });
+  }
+
+  // Function to show the graph
+  function showGraph() {
+    if (!graphVisible) {
+      document.getElementById('barChart').style.display = 'block';
+      graphVisible = true;
+    }
+  }
+
+  // Function to set the threshold value
+  function setThreshold() {
+    const thresholdValue = document.getElementById('threshold').value;
+    fetch(`/setThreshold?value=${thresholdValue}`)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error('Error setting threshold:', error);
+      });
+  }
+</script>
+
+</body>
+</html>
